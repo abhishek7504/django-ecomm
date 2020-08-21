@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %} {{request.user.first_name}} User {% endblock %}
+{% block content %}
+
+<br>
+<div class="container">
+    <div class="row">
+        {% for x in product %}
+
+        <div class="card" style="width: 12rem; float: left; ">
+            <div class="card-header" style="background-color: #343A40;"><span class="title">{{x.title}}</span>
+            </div>
+            <a href="{% url 'web:product_detial' pk=x.id %}">
+                <img src="{{x.image.url}}" class="card-img-top">
+            </a>
+            <div class="card-body">
+                <p class="card-text">{{x.description|truncatechars:50}}</p>
+            </div>
+            <div class="card-footer" style="background-color: #343A40;">
+                <div class="title">
+                    {{x.price}}
+                    <span class="card-items">
+                        <a href="{% url 'web:add_to_wishlist' pk=x.id %}">
+                            <i class="fas fa-heart"></i>
+                        </a>
+                        <i class="fas fa-cart-plus"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

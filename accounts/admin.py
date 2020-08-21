@@ -10,3 +10,6 @@ class UserAdmin(admin.ModelAdmin):
     list_filter = ("staff","admin","active",)
     search_fields = ("phone_number", )
     readonly_fields = ("password", )
+
+
+    

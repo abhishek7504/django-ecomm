@@ -1,0 +1,25 @@
+.title{
+    color: #FFFFFF;
+}
+
+i.fas.fa-heart {
+    color: red;
+}
+i.fas.fa-heart-broken{
+    color: red;
+}
+i.fas.fa-heart-broken:hover{
+    font-size: 20px;
+}
+
+i.fas.fa-heart:hover {
+    font-size: 20px;
+}
+
+span.card-items {
+    float: right;
+}
+
+i.fas.fa-cart-plus:hover {
+    font-size: 20px;
+}

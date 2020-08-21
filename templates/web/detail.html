@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %} {{product.title}}{% endblock %}
+{% block content %}
+
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card detail-img-card">
+                <div class="card-header">
+                    <img class="detail-img" src="{{product.image.url}}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <span class="prod-desc">
+                    {{product.title}}
+                </span>
+                <hr>
+                <span class="detail-mrp">
+                    MRP : <span id="mrp">1599.00</span>
+                </span>
+
+                <span class="detail-price">
+                    Price : <span id="price">{{product.price}}</span>
+                </span>
+
+                <span class="detail-price">
+                    You save : <span id="discount"></span>(<span id="dis-pcrtng"></span> %)
+                </span>
+
+                {{product.description}}
+
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+<script>
+console.log('MRP',document.getElementById('mrp').innerText);
+console.log('Price',document.getElementById('price').innerText);
+let mrp = document.getElementById('mrp').innerText;
+let price = document.getElementById('price').innerText
+let discount_value = document.getElementById('mrp').innerText - document.getElementById('price').innerText;
+console.log('discount-value',discount_value);
+document.getElementById('discount').innerText = discount_value;
+discount_percentage = ((discount_value/mrp)*100);
+document.getElementById('dis-pcrtng').innerText = Math.round(discount_percentage)
+</script>
+{% endblock %}

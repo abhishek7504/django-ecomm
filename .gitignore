@@ -5,6 +5,7 @@ include/
 lib/
 tcl/
 scripts/
+**migrations/
 
 
 # Byte-compiled / optimized / DLL files

@@ -1,20 +1,14 @@
 from django.shortcuts import render,get_object_or_404
 from .forms import UserRegistrationForm,LoginForm
 from .models import User
+from web.models import Product, Category
 from django.http import HttpResponse
 from .functions import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.db.models import Q
 from django.shortcuts import redirect
-
-
-def home(request):
-    return render(request,'home.html')
-
-def dashboard(request):
-    return render(request,'accounts/dashboard.html')
-
+from django.conf import settings
 
 def register(request):
   if request.method == 'POST':
@@ -28,12 +22,21 @@ def register(request):
       new_user.set_password(cd['password'])
       #save the user  objects
       new_user.save()
+      request.session['first_name'] = new_user.first_name
+      #print('new user first name',new_user.first_name)
       
-      return HttpResponse("Hey ! You have resgitered sucessfully to the site")
+      return redirect('accounts:register_complete')
+    else:
+        print(user_form.errors)
 
   else:
     user_form = UserRegistrationForm()
   return render(request, "accounts/register.html",{'user_form':user_form}) 
+
+
+def register_complete(request):
+    return render(request,'accounts/register-complete.html',{'username':request.session.get('first_name')})
+
 
 
 def login(request):
@@ -47,7 +50,14 @@ def login(request):
             user = authenticate(request,username=username , password=password)
             if user is not None:
                 auth_login(request,user)
-                return redirect('accounts:dashboard')
+                next_url = request.GET.get('next')
+                print('next_url ========> ',next_url)
+                if next_url is not None:
+                  url = settings.BASE_URL + next_url
+                  print("Final Url ===> ",url)
+                else:
+                  url = "web:dashboard"
+                return redirect(url)
             else:
                 return HttpResponse("You Entered wrong password")
         else:
@@ -58,8 +68,9 @@ def login(request):
 
 def user_logout(request):
     auth_logout(request)
-    return redirect('accounts:home')
+    return redirect('web:home')
     return HttpResponse("Now you are logged out")
+
 
 
 

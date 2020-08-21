@@ -16,7 +16,8 @@
       <input type="checkbox" class="form-check-input" id="exampleCheck1">
       <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Sign in</button>
     <input type="hidden" name="next" value="{{ next }}" />
+    <a href="{% url 'accounts:register' %}" class="btn btn-outline-primary">Register</a>
   </form>
 {% endblock %}

@@ -1,15 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration</title>
-</head>
-<body>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{user_form.as_p}}
-        <button type="submit">Register</button>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %} Register {% endblock %}
+{% block content %}
+<form action="{% url 'accounts:register' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="exampleInputEmail1">Phone Number</label>
+        <input name="phone_number" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Enter phone number">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Enter email">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">First Name</label>
+        <input name="first_name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Enter email/phone number">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Last Name</label>
+        <input name="last_name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Enter email/phone number">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Confirm Password</label>
+        <input name="password2" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email or phone number with anyone else.</small>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+{% endblock %}

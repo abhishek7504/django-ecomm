@@ -1,0 +1,19 @@
+img.detail-img {
+    max-height: 410px;
+    border: 2px solid darkgray;
+    border-radius: 7px;
+}
+
+span.prod-desc {
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.detail-mrp{
+    text-decoration: line-through;
+    font-weight: 400;
+}
+
+/* .card.detail-img-card {
+    max-width: 340px;
+} */
